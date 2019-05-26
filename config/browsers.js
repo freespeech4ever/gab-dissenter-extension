@@ -11,7 +11,7 @@ const chrome = new Browser({
         MESSENGER: 'extension',
     },
     manifestMap: {
-        "background.persistent": false,
+        "background.persistent": true,
         "offline_enabled": false,
         "version_name": "0.1.9",
         "version": "0.1.9",
@@ -20,7 +20,7 @@ const chrome = new Browser({
         "omnibox": {
             "keyword" : "dissent"
         },
-        "optional_permissions": [
+        "permissions": [
             "topSites",
             "tabs",
         ],
@@ -98,9 +98,9 @@ const safari = new Browser({
 
 const Browsers = [
     chrome,
-    firefox,
-    edge,
-    safari,
+    //firefox,
+    //edge,
+    //safari,
 ];
 
 module.exports = Browsers;

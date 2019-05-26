@@ -134,10 +134,10 @@ gulp.task('scripts', () => {
                 .pipe(insert.prepend(`var BROWSER_CONFIG = ${browserConfig};`))
                 .pipe(replace('__BROWSER__', browser.scriptVariableMap.BROWSER))
                 .pipe(replace('__CONTEXT_MENUS__', browser.scriptVariableMap.CONTEXT_MENUS))
-                .pipe(uglify({
-                    mangle: {},
-                }))
-                .pipe(insert.prepend(`/* Automatically generated file. Do not edit directly.\nCopyright (C) 2019 Gab AI, Inc.\nAll Rights Reserved */\n`))
+                //.pipe(uglify({
+                //    mangle: {},
+                //}))
+                //.pipe(insert.prepend(`/* Automatically generated file. Do not edit directly.\nCopyright (C) 2019 Gab AI, Inc.\nAll Rights Reserved */\n`))
                 .pipe(gulp.dest(`${savePath}/${fileName}`))
                 .on('error', err => {
                     reject(err);
