@@ -21,9 +21,14 @@ var TopSites = function() {
 
     var allStyleClasses = [].concat.apply([], [sizes, highlights, shapes]);
 
-    if (!this.checked) return false;
+    topSitesEnabledCheckbox.addEventListener("change", function() {
+        if (!this.checked) return false;
 
-    createTopWithDefaults();
+        chrome.permissions.request(optionalPermissions, function(granted) {
+            if (granted) createTopWithDefaults();
+        });
+    });
+
 
     function createTopWithDefaults() {
         createTop(
@@ -49,12 +54,10 @@ var TopSites = function() {
         __BROWSER__.topSites.get(function(topSites) {
             reset();
 
-            if (topSites.length == 0) {
-                topSites = [
-                    {url:'https://gab.com'},
-                    {url:'https://dissenter.com'},
-                    {url:'https://en.wikipedia.org/wiki/Constitution_of_the_United_States'}
-                ]
+            if (topSites.length < 5) {
+                topSites.push({url:'https://gab.com', title:'Gab'})
+                topSites.push({url:'https://dissenter.com', title:'Dissenter'})
+                topSites.push({url:'https://en.wikipedia.org/wiki/Constitution_of_the_United_States', title: 'U.S. Constitution'})
             }
 
             var max = Math.min(topSites.length, limit);
