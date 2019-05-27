@@ -21,15 +21,9 @@ var TopSites = function() {
 
     var allStyleClasses = [].concat.apply([], [sizes, highlights, shapes]);
 
-    //
+    if (!this.checked) return false;
 
-    topSitesEnabledCheckbox.addEventListener("change", function() {
-        if (!this.checked) return false;
-
-        __BROWSER__.permissions.request(optionalPermissions, function(granted) {
-            if (granted) createTopWithDefaults();
-        });
-    });
+    createTopWithDefaults();
 
     function createTopWithDefaults() {
         createTop(
@@ -54,6 +48,14 @@ var TopSites = function() {
 
         __BROWSER__.topSites.get(function(topSites) {
             reset();
+
+            if (topSites.length == 0) {
+                topSites = [
+                    {url:'https://gab.com'},
+                    {url:'https://dissenter.com'},
+                    {url:'https://en.wikipedia.org/wiki/Constitution_of_the_United_States'}
+                ]
+            }
 
             var max = Math.min(topSites.length, limit);
 
