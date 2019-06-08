@@ -48,12 +48,6 @@ var Options = function() {
     ];
 
     function setKeyValue(checkboxBlock) {
-        //If is new tab, request "tabs" permission
-        if (checkboxBlock.key === CUSTOM_NEW_TAB_ENABLED) {
-            __BROWSER__.permissions.request(optionalPermissions, function(granted) {
-                //
-            });
-        }
 
         //Send message
         __BROWSER__.runtime.sendMessage({

@@ -53,38 +53,6 @@ html
 								input(id='disqus-dissent-enabled' class='input-block-item__checkbox' type='checkbox' checked='')
 								| Disqus Dissent Button Enabled
 							
-					//- BLOCK - New Tab
-					div(class='input-block')
-						div(class='input-block__meta no-select')
-							span(class='input-block__meta-title') New Tab Experience
-							span(class='input-block__meta-subtitle')
-								| The Dissenter New Tab Experience is a customizable landing page containing search, top sites, time and date.
-								br
-								| It also includes a custom Dissenter feed of popular URLs as well as your own notifications.
-								br
-								| By enabling this functionality, we request the "Tabs" permission in order to make this feature optional.
-								br
-								| Only on browsers: Firefox and Chrome
-						div(class='input-block__items')
-
-							label(class='input-block-item no-select')
-								input(id='custom-new-tab-enabled' class='input-block-item__checkbox' type='checkbox')
-								| Custom New Tab Enabled
-								
-					//- BLOCK - Permissions
-					div(class='input-block')
-						div(class='input-block__meta no-select')
-							span(class='input-block__meta-title') About Browser Permissions
-						div(class='input-block__items input-block__items--full')
-							p(class='input-block-item__paragraph')
-								b Active Tab:&nbsp;
-								| The "Active Tab" permission gives this extension temporary access to the currently active tab when the you invoke the extension.&nbsp;
-								| Access to the tab lasts while the you are on that page, and is revoked when the you navigates away or closes the tab.
-							p(class='input-block-item__paragraph')
-								b Tabs:&nbsp;
-								| The primary reason we request the "Tabs" permission is for this extension access to the current url you are at.
-								| We do this for a few reasons: 1. In order to display the comment badge on the icon. 2. To enable all Disqus comment sections to have a "View comments on Dissenter" button. 3. To enable the New Tab Experience.
-
 					//- BLOCK - Contact
 					div(class='input-block')
 						div(class='input-block__meta no-select')
