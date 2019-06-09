@@ -1,123 +1,4 @@
-var BROWSER_CONFIG = {"name":"Google Chrome","slug":"chrome","version":"0.1.9"};/* BROWSERS */
-var BROWSER_CHROME_SLUG = 'chrome';
-var BROWSER_FIREFOX_SLUG = 'firefox';
-var BROWSER_EDGE_SLUG = 'edge';
-var BROWSER_SAFARI_SLUG = 'safari';
-
-/* BASE URI FOR DISSENTER EXTENSION */
-var DISSENTER_HOME_PAGE_URI = "https://dissenter.com";
-var BASE_URI = 'https://dissenter.com/discussion/begin-extension?url=';
-var COMMENT_COUNT_URI = "https://dissenter.com/notification/comment-count?url=";
-
-/* ACTIONS */
-var BACKGROUND_ACTION_OPEN_POPUP = 'open_popup';
-var BACKGROUND_ACTION_GET_KEY = 'get_key';
-var BACKGROUND_ACTION_SET_KEY = 'set_key';
-var BACKGROUND_ACTION_SET_BADGE = 'set_badge';
-var BACKGROUND_ACTION_TAB_UPDATED = 'tab_updated';
-
-/* COLORS */
-var COLOR_GAB_GREEN = '#21cf7b';
-
-/* SEARCH ENGINES */
-var SEARCH_ENGINES = [
-    {
-        name: "DuckDuckGo",
-        url: "https://duckduckgo.com/?q=",
-        icon: "duckduckgo.svg"
-    },
-    {
-        name: "Startpage",
-        url: "https://www.startpage.com/do/search?q=",
-        icon: "startpage.png"
-    },
-    {
-        name: "Qwant",
-        url: "https://www.qwant.com/?q=",
-        icon: "qwant.svg"
-    },
-    {
-        name: "Bing",
-        url: "https://www.bing.com/search?q=",
-        icon: "bing.svg"
-    },
-    {
-        name: "Yahoo!",
-        url: "https://search.yahoo.com/search?p=",
-        icon: "yahoo.svg"
-    },
-    {
-        name: "Google",
-        url: "https://www.google.com/search?q=",
-        icon: "google.svg"
-    }
-];
-
-/* STORAGE */
-var STORAGE_BASE = 'gab_dissenter_extension_data';
-
-var TWITTER_BUTTONS_ENABLED = 'twitter_buttons_enabled';
-var REDDIT_BUTTONS_ENABLED = 'reddit_buttons_enabled';
-var YOUTUBE_BUTTONS_ENABLED = 'youtube_buttons_enabled';
-var WINDOW_SIDEBAR_UNAVAILABLE_ENABLED = 'window_sidebar_unavailable_enabled';
-var WEBSITE_COMMENT_BADGE_ENABLED = 'website_comment_badge_enabled';
-var DISSENT_DISQUS_BUTTONS_ENABLED = 'dissent_disqus_buttons_enabled';
-var WIKIPEDIA_BUTTONS_ENABLED = 'wikipedia_buttons_enabled';
-var CUSTOM_NEW_TAB_ENABLED = 'custom_new_tab_enabled';
-
-/* NEW TAB */
-var NT_DEFAULT_SEARCH_ENGINE = 'nt_default_search_engine';
-
-var NT_TOP_SITES_ENABLED = 'nt_top_sites_enabled';
-var NT_TOP_SITES_LIMIT = 'nt_top_sites_limit';
-var NT_TOP_SITES_SIZE = 'nt_top_sites_size';
-var NT_TOP_SITES_SHAPE = 'nt_top_sites_shape';
-var NT_TOP_SITES_HIGHLIGHT = 'nt_top_sites_highlight';
-var NT_TOP_SITES_SHOW_TITLE = 'nt_top_sites_show_title';
-
-var NT_DATETIME_SHOW_DATE = 'nt_datetime_show_date';
-var NT_DATETIME_SHOW_TIME = 'nt_datetime_show_time';
-
-var NT_COLORS_SEARCH = 'nt_colors_search';
-var NT_COLORS_TEXT = 'nt_colors_text';
-
-var NT_BACKGROUND_SOLID_COLOR = 'nt_background_solid_color';
-var NT_BACKGROUND_IMAGE = 'nt_background_image';
-var NT_BACKGROUND_RANDOM_GRADIENT = 'nt_background_random_gradient';
-
-var NT_DISSENTER_ENABLED = 'nt_dissenter_enabled';
-var NT_DISSENTER_DEFAULT_TAB = 'nt_dissenter_default_tab';
-
-/* STORAGE DEFAULTS */
-var STORAGE_DEFAULT_PARAMS = {};
-STORAGE_DEFAULT_PARAMS[TWITTER_BUTTONS_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[REDDIT_BUTTONS_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[YOUTUBE_BUTTONS_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[WINDOW_SIDEBAR_UNAVAILABLE_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[WEBSITE_COMMENT_BADGE_ENABLED] = false;
-STORAGE_DEFAULT_PARAMS[DISSENT_DISQUS_BUTTONS_ENABLED] = false;
-STORAGE_DEFAULT_PARAMS[WIKIPEDIA_BUTTONS_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[CUSTOM_NEW_TAB_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[NT_DEFAULT_SEARCH_ENGINE] = SEARCH_ENGINES[0];
-STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_LIMIT] = 10;
-STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_SIZE] = "md";
-STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_SHAPE] = "circle";
-STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_HIGHLIGHT] = "light";
-STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_SHOW_TITLE] = true;
-STORAGE_DEFAULT_PARAMS[NT_DATETIME_SHOW_DATE] = true;
-STORAGE_DEFAULT_PARAMS[NT_DATETIME_SHOW_TIME] = true;
-STORAGE_DEFAULT_PARAMS[NT_COLORS_SEARCH] = "white";
-STORAGE_DEFAULT_PARAMS[NT_COLORS_TEXT] = "white";
-STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_SOLID_COLOR] = "#444";
-STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_IMAGE] = "";
-STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_RANDOM_GRADIENT] = false;
-STORAGE_DEFAULT_PARAMS[NT_DISSENTER_ENABLED] = true;
-STORAGE_DEFAULT_PARAMS[NT_DISSENTER_DEFAULT_TAB] = "home";
-
-var STORAGE_KEY_ALL = 'all';
-
-/**
+var BROWSER_CONFIG = {"name":"Google Chrome","slug":"chrome","version":"0.1.9"};/**
  * @description Internal helper to check if parameter is an object
  * @function isObject
  * @param {*} obj
@@ -234,6 +115,137 @@ function removeManyClasses(elem, classes) {
   };
 };
 
+/* BROWSERS */
+var BROWSER_CHROME_SLUG = 'chrome';
+var BROWSER_FIREFOX_SLUG = 'firefox';
+var BROWSER_EDGE_SLUG = 'edge';
+var BROWSER_SAFARI_SLUG = 'safari';
+
+/* BASE URI FOR DISSENTER EXTENSION */
+var DISSENTER_HOME_PAGE_URI = "https://dissenter.com";
+var BASE_URI = 'https://dissenter.com/discussion/begin-extension?url=';
+var COMMENT_COUNT_URI = "https://dissenter.com/notification/comment-count?url=";
+
+/* ACTIONS */
+var BACKGROUND_ACTION_OPEN_POPUP = 'open_popup';
+var BACKGROUND_ACTION_GET_KEY = 'get_key';
+var BACKGROUND_ACTION_SET_KEY = 'set_key';
+var BACKGROUND_ACTION_SET_BADGE = 'set_badge';
+var BACKGROUND_ACTION_TAB_UPDATED = 'tab_updated';
+
+/* COLORS */
+var COLOR_GAB_GREEN = '#21cf7b';
+
+/* SEARCH ENGINES */
+var SEARCH_ENGINES = [
+    {
+        name: "DuckDuckGo",
+        url: "https://duckduckgo.com/?q=",
+        icon: "duckduckgo.svg"
+    },
+    {
+        name: "Startpage",
+        url: "https://www.startpage.com/do/search?q=",
+        icon: "startpage.png"
+    },
+    {
+        name: "Qwant",
+        url: "https://www.qwant.com/?q=",
+        icon: "qwant.svg"
+    },
+    {
+        name: "Bing",
+        url: "https://www.bing.com/search?q=",
+        icon: "bing.svg"
+    },
+    {
+        name: "Yahoo!",
+        url: "https://search.yahoo.com/search?p=",
+        icon: "yahoo.svg"
+    },
+    {
+        name: "Google",
+        url: "https://www.google.com/search?q=",
+        icon: "google.svg"
+    }
+];
+
+/* STORAGE */
+var STORAGE_BASE = 'gab_dissenter_extension_data';
+
+var TWITTER_BUTTONS_ENABLED = 'twitter_buttons_enabled';
+var REDDIT_BUTTONS_ENABLED = 'reddit_buttons_enabled';
+var YOUTUBE_BUTTONS_ENABLED = 'youtube_buttons_enabled';
+var WINDOW_SIDEBAR_UNAVAILABLE_ENABLED = 'window_sidebar_unavailable_enabled';
+var WEBSITE_COMMENT_BADGE_ENABLED = 'website_comment_badge_enabled';
+var DISSENT_DISQUS_BUTTONS_ENABLED = 'dissent_disqus_buttons_enabled';
+var WIKIPEDIA_BUTTONS_ENABLED = 'wikipedia_buttons_enabled';
+var CUSTOM_NEW_TAB_ENABLED = 'custom_new_tab_enabled';
+
+/* NEW TAB */
+var NT_DEFAULT_SEARCH_ENGINE = 'nt_default_search_engine';
+
+var NT_TOP_SITES_ENABLED = 'nt_top_sites_enabled';
+var NT_TOP_SITES_LIMIT = 'nt_top_sites_limit';
+var NT_TOP_SITES_SIZE = 'nt_top_sites_size';
+var NT_TOP_SITES_SHAPE = 'nt_top_sites_shape';
+var NT_TOP_SITES_HIGHLIGHT = 'nt_top_sites_highlight';
+var NT_TOP_SITES_SHOW_TITLE = 'nt_top_sites_show_title';
+
+var NT_DATETIME_SHOW_DATE = 'nt_datetime_show_date';
+var NT_DATETIME_SHOW_TIME = 'nt_datetime_show_time';
+
+var NT_COLORS_SEARCH = 'nt_colors_search';
+var NT_COLORS_TEXT = 'nt_colors_text';
+
+var NT_BACKGROUND_SOLID_COLOR = 'nt_background_solid_color';
+var NT_BACKGROUND_IMAGE = 'nt_background_image';
+var NT_BACKGROUND_RANDOM_GRADIENT = 'nt_background_random_gradient';
+var NT_BACKGROUND_IMAGE_URL = 'nt_background_image_url';
+
+var NT_DISSENTER_ENABLED = 'nt_dissenter_enabled';
+var NT_DISSENTER_DEFAULT_TAB = 'nt_dissenter_default_tab';
+
+var NT_DISSENTER_PINS = 'nt_dissenter_pins';
+var NT_DISSENTER_TIPS_HIDE = 'nt_dissenter_hide_tips';
+
+/* STORAGE DEFAULTS */
+var STORAGE_DEFAULT_PARAMS = {};
+STORAGE_DEFAULT_PARAMS[TWITTER_BUTTONS_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[REDDIT_BUTTONS_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[YOUTUBE_BUTTONS_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[WINDOW_SIDEBAR_UNAVAILABLE_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[WEBSITE_COMMENT_BADGE_ENABLED] = false;
+STORAGE_DEFAULT_PARAMS[DISSENT_DISQUS_BUTTONS_ENABLED] = false;
+STORAGE_DEFAULT_PARAMS[WIKIPEDIA_BUTTONS_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[CUSTOM_NEW_TAB_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[NT_DEFAULT_SEARCH_ENGINE] = SEARCH_ENGINES[0];
+STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_ENABLED] = true;
+STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_LIMIT] = 20;
+STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_SIZE] = "md";
+STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_SHAPE] = "circle";
+STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_HIGHLIGHT] = "light";
+STORAGE_DEFAULT_PARAMS[NT_TOP_SITES_SHOW_TITLE] = true;
+STORAGE_DEFAULT_PARAMS[NT_DATETIME_SHOW_DATE] = true;
+STORAGE_DEFAULT_PARAMS[NT_DATETIME_SHOW_TIME] = true;
+STORAGE_DEFAULT_PARAMS[NT_COLORS_SEARCH] = "white";
+STORAGE_DEFAULT_PARAMS[NT_COLORS_TEXT] = "white";
+STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_SOLID_COLOR] = "";
+STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_IMAGE] = "";
+STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_IMAGE_URL] = "../assets/images/defiant-bg1.jpg";
+STORAGE_DEFAULT_PARAMS[NT_BACKGROUND_RANDOM_GRADIENT] = false;
+STORAGE_DEFAULT_PARAMS[NT_DISSENTER_ENABLED] = false;
+STORAGE_DEFAULT_PARAMS[NT_DISSENTER_DEFAULT_TAB] = "home";
+STORAGE_DEFAULT_PARAMS[NT_DISSENTER_PINS] = {
+    "page1": [
+        {url:"https://gab.com", title:"Gab"},
+        {url:"https://dissenter.com", title:"Dissenter"}
+    ]
+};
+STORAGE_DEFAULT_PARAMS[NT_DISSENTER_TIPS_HIDE] = false;
+
+var STORAGE_KEY_ALL = 'all';
+
 var Background = function() {
 
     var scope = this;
@@ -244,6 +256,9 @@ var Background = function() {
     var mainImage = document.getElementById("main__image");
     var clearUploadedBackgroundBtn = document.getElementById("sidebar-settings-meta-clear-background-image-btn");
     var metaBackgroundImageBox = document.getElementById("sidebar-settings-meta-background-image");
+    var solidColorOption = document.getElementById("si_nt_background_solid_color");
+    var randomGradientOption = document.getElementById("si_nt_background_random_gradient");
+    var hideTipsOption = document.getElementById("si_nt_dissenter_hide_tips");
 
     var colorSchemes = ["cs--black", "cs--white", "cs--light-grey", "cs--dark-grey"];
 
@@ -258,11 +273,14 @@ var Background = function() {
     });
 
     function resetBackgroundImage() {
-        metaBackgroundImageBox.src = "";
+        metaBackgroundImageBox.src = newTab.userDefaults[NT_BACKGROUND_IMAGE_URL];
 
-
-        mainImage.classList.toggle("hidden", true);
-        mainImage.style.removeProperty("background-image");
+        if (!solidColorOption.value && !randomGradientOption.enabled) {
+            mainImage.classList.remove("hidden");
+        } else {
+            mainImage.style.removeProperty("background-image");
+            mainImage.classList.add("hidden");
+        }
     };
 
     function getRandomHex() {
@@ -322,13 +340,20 @@ var Background = function() {
 
         var imageData = event.detail;
 
-        if (!imageData) {
+        if (!imageData && !newTab.userDefaults[NT_BACKGROUND_IMAGE_URL]) {
             resetBackgroundImage();
         }
         else {
-            var bgImg = "url(" + imageData + ")";
-            mainImage.style.setProperty("background-image", bgImg, "important");
-            metaBackgroundImageBox.src = imageData;
+            var bgImg = '';
+            if (imageData) {
+                bgImg = "url(" + imageData + ")";
+                mainImage.style.setProperty("background-image", bgImg, "important");
+                metaBackgroundImageBox.src = imageData;
+            } else {
+                bgImg = "url(" + newTab.userDefaults[NT_BACKGROUND_IMAGE_URL] + ")";
+                mainImage.style.setProperty("background-image", bgImg, "important");
+                metaBackgroundImageBox.src = newTab.userDefaults[NT_BACKGROUND_IMAGE_URL];
+            }
 
             //Reset background solid color
             var event2 = new CustomEvent("WELM_update_settings_item", {
@@ -356,12 +381,21 @@ var Background = function() {
         content.classList.add(newClass);
     };
 
+    scope.setHideTips = function(event) {
+        if (!isObject(event)) return false;
+        var enabled = event.detail;
+
+        if (enabled) {
+
+        }
+    }
     //
 
     window.addEventListener("WELM_nt_background_solid_color", scope.setBackgroundSolidColor, false);
     window.addEventListener("WELM_nt_background_image", scope.setBackgroundImage, false);
     window.addEventListener("WELM_nt_colors_text", scope.setPageColorScheme, false);
     window.addEventListener("WELM_nt_background_random_gradient", scope.setBackgroundRandomGradient, false);
+    window.addEventListener("WELM_nt_dissenter_hide_tips", scope.setHideTips, false);
 };
 
 var DateTime = function() {
@@ -1211,19 +1245,13 @@ var DissenterNotifications = function() {
 
 var TopSites = function() {
 
-    //
-
     var scope = this;
-
-    //
 
     var topSiteList = document.getElementById('top-site-list');
     var topSitesEnabledCheckbox = document.querySelector('.sidebar-table-item__input.sidebar-table-item__input--checkbox[data-storage-key="nt_top_sites_enabled"]');
-
-    var optionalPermissions = {
-        permissions: ["topSites"]
-    };
-
+    var tipsCheckbox = document.querySelector('.sidebar-table-item__input.sidebar-table-item__input--checkbox[data-storage-key="nt_dissenter_hide_tips"]');
+    var tipsContent = document.getElementById("dissenter-tab-foot");
+    var tipsCloser = document.getElementById("dissenter-tab-foot-closer");
     var topSiteItems = [];
 
     var sizes = ["sm", "md", "lg"];
@@ -1235,11 +1263,23 @@ var TopSites = function() {
     topSitesEnabledCheckbox.addEventListener("change", function() {
         if (!this.checked) return false;
 
-        chrome.permissions.request(optionalPermissions, function(granted) {
-            if (granted) createTopWithDefaults();
-        });
+        createTopWithDefaults();
     });
 
+    function updateTipsState() {
+        if (tipsCheckbox.checked) {
+            tipsContent.classList.toggle("hidden", true)
+        } else {
+            tipsContent.classList.toggle("hidden", false)
+        }
+    }
+
+    tipsCloser.addEventListener("click", function() {
+        tipsCheckbox.checked = true;
+        updateTipsState();
+    })
+
+    tipsCheckbox.addEventListener("change", updateTipsState)
 
     function createTopWithDefaults() {
         createTop(
@@ -1251,39 +1291,26 @@ var TopSites = function() {
     };
 
     function createTop(enabled, limit, size, shape) {
-        if (!size) size = newTab.newuserDefaults[NT_TOP_SITES_SIZE];
+        if (!size) size = newTab.userDefaults[NT_TOP_SITES_SIZE];
         if (!shape) shape = newTab.userDefaults[NT_TOP_SITES_SHAPE];
         if (limit === undefined) limit = newTab.userDefaults[NT_TOP_SITES_LIMIT];
 
         if (!enabled) {
             return false;
         }
+        reset();
+        topSites = newTab.userDefaults[NT_DISSENTER_PINS]['page1'];;
+        
+        var max = Math.min(topSites.length, limit);
 
-        //If not enabled, ignore
-        if (!chrome.topSites) return false;
+        for (var i = 0; i < max; i++) {
+            var site = topSites[i];
 
-        chrome.topSites.get(function(topSites) {
-            reset();
-
-            if (topSites.length < 5) {
-                topSites.push({url:'https://gab.com', title:'Gab'})
-                topSites.push({url:'https://dissenter.com', title:'Dissenter'})
-                topSites.push({url:'https://en.wikipedia.org/wiki/Constitution_of_the_United_States', title: 'U.S. Constitution'})
-            }
-
-            var max = Math.min(topSites.length, limit);
-
-            for (var i = 0; i < max; i++) {
-                var site = topSites[i];
-
-                var topSiteItem = getTopSiteItem(site);
-                if (!topSiteItem) continue;
-
-                topSiteItems.push(topSiteItem);
-
-                topSiteList.appendChild(topSiteItem);
-            }
-        });
+            var topSiteItem = getTopSiteItem(site);
+            if (!topSiteItem) continue;
+            topSiteItems.push(topSiteItem);
+            topSiteList.appendChild(topSiteItem);
+        }
     };
 
     function reset() {
@@ -1302,9 +1329,7 @@ var TopSites = function() {
         if (!highlight) highlight = newTab.userDefaults[NT_TOP_SITES_HIGHLIGHT];
 
         var hostname = (new URL(site.url)).hostname;
-        var titleText = hostname;
-        titleText = titleText.replace('www.', '');
-        titleText = titleText.replace('.com', '');
+        var titleText = site.title;
 
         var button = document.createElement('a');
         button.className = 'top-site-item';

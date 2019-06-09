@@ -1,18 +1,12 @@
 var TopSites = function() {
 
-    //
-
     var scope = this;
-
-    //
 
     var topSiteList = document.getElementById('top-site-list');
     var topSitesEnabledCheckbox = document.querySelector('.sidebar-table-item__input.sidebar-table-item__input--checkbox[data-storage-key="nt_top_sites_enabled"]');
-
-    var optionalPermissions = {
-        permissions: ["topSites"]
-    };
-
+    var tipsCheckbox = document.querySelector('.sidebar-table-item__input.sidebar-table-item__input--checkbox[data-storage-key="nt_dissenter_hide_tips"]');
+    var tipsContent = document.getElementById("dissenter-tab-foot");
+    var tipsCloser = document.getElementById("dissenter-tab-foot-closer");
     var topSiteItems = [];
 
     var sizes = ["sm", "md", "lg"];
@@ -24,11 +18,23 @@ var TopSites = function() {
     topSitesEnabledCheckbox.addEventListener("change", function() {
         if (!this.checked) return false;
 
-        chrome.permissions.request(optionalPermissions, function(granted) {
-            if (granted) createTopWithDefaults();
-        });
+        createTopWithDefaults();
     });
 
+    function updateTipsState() {
+        if (tipsCheckbox.checked) {
+            tipsContent.classList.toggle("hidden", true)
+        } else {
+            tipsContent.classList.toggle("hidden", false)
+        }
+    }
+
+    tipsCloser.addEventListener("click", function() {
+        tipsCheckbox.checked = true;
+        updateTipsState();
+    })
+
+    tipsCheckbox.addEventListener("change", updateTipsState)
 
     function createTopWithDefaults() {
         createTop(
@@ -40,39 +46,26 @@ var TopSites = function() {
     };
 
     function createTop(enabled, limit, size, shape) {
-        if (!size) size = newTab.newuserDefaults[NT_TOP_SITES_SIZE];
+        if (!size) size = newTab.userDefaults[NT_TOP_SITES_SIZE];
         if (!shape) shape = newTab.userDefaults[NT_TOP_SITES_SHAPE];
         if (limit === undefined) limit = newTab.userDefaults[NT_TOP_SITES_LIMIT];
 
         if (!enabled) {
             return false;
         }
+        reset();
+        topSites = newTab.userDefaults[NT_DISSENTER_PINS]['page1'];;
+        
+        var max = Math.min(topSites.length, limit);
 
-        //If not enabled, ignore
-        if (!__BROWSER__.topSites) return false;
+        for (var i = 0; i < max; i++) {
+            var site = topSites[i];
 
-        __BROWSER__.topSites.get(function(topSites) {
-            reset();
-
-            if (topSites.length < 5) {
-                topSites.push({url:'https://gab.com', title:'Gab'})
-                topSites.push({url:'https://dissenter.com', title:'Dissenter'})
-                topSites.push({url:'https://en.wikipedia.org/wiki/Constitution_of_the_United_States', title: 'U.S. Constitution'})
-            }
-
-            var max = Math.min(topSites.length, limit);
-
-            for (var i = 0; i < max; i++) {
-                var site = topSites[i];
-
-                var topSiteItem = getTopSiteItem(site);
-                if (!topSiteItem) continue;
-
-                topSiteItems.push(topSiteItem);
-
-                topSiteList.appendChild(topSiteItem);
-            }
-        });
+            var topSiteItem = getTopSiteItem(site);
+            if (!topSiteItem) continue;
+            topSiteItems.push(topSiteItem);
+            topSiteList.appendChild(topSiteItem);
+        }
     };
 
     function reset() {
@@ -91,9 +84,7 @@ var TopSites = function() {
         if (!highlight) highlight = newTab.userDefaults[NT_TOP_SITES_HIGHLIGHT];
 
         var hostname = (new URL(site.url)).hostname;
-        var titleText = hostname;
-        titleText = titleText.replace('www.', '');
-        titleText = titleText.replace('.com', '');
+        var titleText = site.title;
 
         var button = document.createElement('a');
         button.className = 'top-site-item';

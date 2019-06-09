@@ -197,7 +197,7 @@ html, body, main {
 
 .header-search-block {
     display: block;
-    width: 520px;
+    width: 640px;
     position: relative;
     margin: 0 auto;
     height: 40px;
@@ -490,7 +490,7 @@ html, body, main {
 
 .shelf {
     display: block;
-    max-width: 620px;
+    max-width: 660px;
     margin: 0 auto 20px;
 
     &__inner {
@@ -676,7 +676,6 @@ html, body, main {
 
 .dissenter-section {
     display: block;
-    border-top: 1px solid rgba(255,255,255,0.1);
     position: relative;
     padding-bottom: 20px;
     margin-top: 35px;
@@ -1319,4 +1318,47 @@ html, body, main {
     border: 1px dashed #ddd;
     margin-top: 20px;
     object-fit: contain;
+}
+
+.dissenter-tab-foot-content {
+    display: block;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 2em;
+    color: white;
+    font-size: 1.2em;
+
+    &__header {
+        text-align: center;
+        font-size:1.4em;
+        padding-bottom: 10px;
+    }
+
+    &__list {
+        padding:20px;
+    }
+
+    &__item {
+        padding-bottom:5px;
+    }
+
+    &__link {        
+        color: #8E8;
+    }
+}
+
+.dissenter-tab-foot-close {
+    display: inline-block;
+    float: right;
+    vertical-align: top;
+    margin-top:20px;
+    color: white;
+    width:40px;
+    height:40px;
+    &__link {
+        font-size: 14px;
+        text-decoration: none;
+        color: #8E8;
+    }
 }

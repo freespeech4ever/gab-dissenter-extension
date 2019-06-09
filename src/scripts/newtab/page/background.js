@@ -8,6 +8,9 @@ var Background = function() {
     var mainImage = document.getElementById("main__image");
     var clearUploadedBackgroundBtn = document.getElementById("sidebar-settings-meta-clear-background-image-btn");
     var metaBackgroundImageBox = document.getElementById("sidebar-settings-meta-background-image");
+    var solidColorOption = document.getElementById("si_nt_background_solid_color");
+    var randomGradientOption = document.getElementById("si_nt_background_random_gradient");
+    var hideTipsOption = document.getElementById("si_nt_dissenter_hide_tips");
 
     var colorSchemes = ["cs--black", "cs--white", "cs--light-grey", "cs--dark-grey"];
 
@@ -22,11 +25,14 @@ var Background = function() {
     });
 
     function resetBackgroundImage() {
-        metaBackgroundImageBox.src = "";
+        metaBackgroundImageBox.src = newTab.userDefaults[NT_BACKGROUND_IMAGE_URL];
 
-
-        mainImage.classList.toggle("hidden", true);
-        mainImage.style.removeProperty("background-image");
+        if (!solidColorOption.value && !randomGradientOption.enabled) {
+            mainImage.classList.remove("hidden");
+        } else {
+            mainImage.style.removeProperty("background-image");
+            mainImage.classList.add("hidden");
+        }
     };
 
     function getRandomHex() {
@@ -86,13 +92,20 @@ var Background = function() {
 
         var imageData = event.detail;
 
-        if (!imageData) {
+        if (!imageData && !newTab.userDefaults[NT_BACKGROUND_IMAGE_URL]) {
             resetBackgroundImage();
         }
         else {
-            var bgImg = "url(" + imageData + ")";
-            mainImage.style.setProperty("background-image", bgImg, "important");
-            metaBackgroundImageBox.src = imageData;
+            var bgImg = '';
+            if (imageData) {
+                bgImg = "url(" + imageData + ")";
+                mainImage.style.setProperty("background-image", bgImg, "important");
+                metaBackgroundImageBox.src = imageData;
+            } else {
+                bgImg = "url(" + newTab.userDefaults[NT_BACKGROUND_IMAGE_URL] + ")";
+                mainImage.style.setProperty("background-image", bgImg, "important");
+                metaBackgroundImageBox.src = newTab.userDefaults[NT_BACKGROUND_IMAGE_URL];
+            }
 
             //Reset background solid color
             var event2 = new CustomEvent("WELM_update_settings_item", {
@@ -120,10 +133,19 @@ var Background = function() {
         content.classList.add(newClass);
     };
 
+    scope.setHideTips = function(event) {
+        if (!isObject(event)) return false;
+        var enabled = event.detail;
+
+        if (enabled) {
+
+        }
+    }
     //
 
     window.addEventListener("WELM_nt_background_solid_color", scope.setBackgroundSolidColor, false);
     window.addEventListener("WELM_nt_background_image", scope.setBackgroundImage, false);
     window.addEventListener("WELM_nt_colors_text", scope.setPageColorScheme, false);
     window.addEventListener("WELM_nt_background_random_gradient", scope.setBackgroundRandomGradient, false);
+    window.addEventListener("WELM_nt_dissenter_hide_tips", scope.setHideTips, false);
 };
