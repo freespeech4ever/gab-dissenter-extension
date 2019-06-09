@@ -90,7 +90,7 @@ var NT_DISSENTER_ENABLED = 'nt_dissenter_enabled';
 var NT_DISSENTER_DEFAULT_TAB = 'nt_dissenter_default_tab';
 
 var NT_DISSENTER_PINS = 'nt_dissenter_pins';
-var NT_DISSENTER_TIPS_HIDE = 'nt_dissenter_hide_tips';
+var NT_DISSENTER_HIDE_TIPS = 'nt_dissenter_hide_tips';
 
 /* STORAGE DEFAULTS */
 var STORAGE_DEFAULT_PARAMS = {};
@@ -125,7 +125,7 @@ STORAGE_DEFAULT_PARAMS[NT_DISSENTER_PINS] = {
         {url:"https://dissenter.com", title:"Dissenter"}
     ]
 };
-STORAGE_DEFAULT_PARAMS[NT_DISSENTER_TIPS_HIDE] = false;
+STORAGE_DEFAULT_PARAMS[NT_DISSENTER_HIDE_TIPS] = false;
 
 var STORAGE_KEY_ALL = 'all';
 

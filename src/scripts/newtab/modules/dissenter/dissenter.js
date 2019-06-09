@@ -14,7 +14,8 @@ var Dissenter = function() {
     //
 
     function updateActiveTab(tab) {
-        if (!tab || !isString(tab)) return false;
+        var on = document.getElementById("si_nt_dissenter_enabled");
+        if (!on.checked || !tab || !isString(tab)) return false;
 
         var activeTab = document.querySelector(".dissenter-section-header__meta-tabs__btn.active");
         if (activeTab) activeTab.classList.remove("active");
@@ -150,6 +151,7 @@ var Dissenter = function() {
         var enabled = event.detail;
 
         dissenterSection.classList.toggle("hidden", !enabled);
+        if (enabled) updateActiveTab("home");
     };
 
     scope.setDissenterDefaultTab = function(event) {

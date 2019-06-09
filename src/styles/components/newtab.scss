@@ -197,9 +197,9 @@ html, body, main {
 
 .header-search-block {
     display: block;
-    width: 640px;
+    width: 580px;
     position: relative;
-    margin: 0 auto;
+    margin: 40px auto 0px auto;
     height: 40px;
     border-radius: 20px;
 
@@ -491,7 +491,8 @@ html, body, main {
 .shelf {
     display: block;
     max-width: 660px;
-    margin: 0 auto 20px;
+    margin: 0px auto 20px;
+    padding-left:8px;
 
     &__inner {
         display: block;
@@ -508,6 +509,7 @@ html, body, main {
         text-align: left;
     }
 }
+
 
 .top-site-item {
     display: inline-block;
@@ -542,9 +544,9 @@ html, body, main {
     }
 
     &.md {
-        height: 108px;
-        width: 108px;
-        margin: 0 20px 15px 0;
+        height: 120px;
+        width: 116px;
+        //margin: 0 20px 15px 0;
 
         &:nth-child(5n) {
             margin-right: 0;
@@ -597,18 +599,21 @@ html, body, main {
 
     &.light:hover {
         background-color: rgba(255,255,255,0.2);
+        &__title {
+            color: #fff;
+        }
     }
 
     &.light & {
         &__title {
-            color: #fff;
+            color: #bbb;
         }
     }
 
     &__img {
         display: block;
         box-shadow: 0 10px 10px -5px rgba(0,0,0,0.25);
-        background-color: #fff;
+        background-color: rgba(0,50,0,0.3);
         object-fit: contain;
         overflow: hidden;
     }
@@ -616,7 +621,7 @@ html, body, main {
     &__title {
         display: none;
         text-align: center;
-        font-weight: 600;
+        font-weight: 400;
         font-size: 12px;
         margin: 6px auto;
     }
@@ -1320,14 +1325,18 @@ html, body, main {
     object-fit: contain;
 }
 
+#dissenter-tab-foot {
+    margin-top:25px;
+}
+
 .dissenter-tab-foot-content {
     display: block;
     width: 100%;
     padding: 30px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.3);
     border-radius: 2em;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.3em;
 
     &__header {
         text-align: center;
@@ -1340,7 +1349,7 @@ html, body, main {
     }
 
     &__item {
-        padding-bottom:5px;
+        padding-bottom:20px;
     }
 
     &__link {        
@@ -1353,7 +1362,7 @@ html, body, main {
     float: right;
     vertical-align: top;
     margin-top:20px;
-    color: white;
+    cursor: pointer;
     width:40px;
     height:40px;
     &__link {
@@ -1361,4 +1370,77 @@ html, body, main {
         text-decoration: none;
         color: #8E8;
     }
+}
+
+
+.top-site-wrapper {
+    display: inline-block;
+    margin-right: 5px;
+
+    &:hover {
+        & > .top-site-remove {
+            visibility: visible;
+        }
+    }
+}
+
+.top-site-remove {
+    visibility: hidden;
+    float: right;
+    vertical-align: top;
+    cursor: pointer;
+    color: #8E8;
+}
+
+.top-site-add-button {
+    padding: 8px;
+    border-radius: 6px;
+    background-color: rgba(0,50,0,0.3);
+    cursor: pointer;
+    color: #BBB;
+
+    &:hover,
+    &:active {
+        color: white;
+    }
+}
+
+#pinned-site-entry {
+    background-color: rgba(0,0,50,0.3);
+    border-radius: 12px;
+    width: 70%;
+}
+
+.pinned-site-entry-row {
+    display: block;
+    text-align: center;
+    margin: 0px auto;
+    padding: 10px;
+
+    & > label {
+        color: white;
+        font-size: 1.5em;
+        margin-right:10px;
+    }
+
+    & > input {
+        height: 30px;
+        font-size: 1.3em;
+        border-radius: 6px;
+        padding:5px;
+        width: 400px;
+    }
+
+    & > #pinned_title {
+        width:140px;
+    }
+
+    & > button {
+        background-color: rgba(30,80,30, 0.6);
+    }
+}
+
+.pinned-cancel {
+    cursor: pointer;
+    color: #BBB;
 }

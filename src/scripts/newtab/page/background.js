@@ -24,6 +24,12 @@ var Background = function() {
         resetBackgroundImage();
     });
 
+    var tipsCloser = document.getElementById("dissenter-tab-foot-closer");
+    tipsCloser.addEventListener('click', function() {
+        newTab.settings.updateSettingsItem(NT_DISSENTER_HIDE_TIPS, true, true, true);
+        scope.setHideTips();
+    });
+
     function resetBackgroundImage() {
         metaBackgroundImageBox.src = newTab.userDefaults[NT_BACKGROUND_IMAGE_URL];
 
@@ -133,12 +139,15 @@ var Background = function() {
         content.classList.add(newClass);
     };
 
-    scope.setHideTips = function(event) {
-        if (!isObject(event)) return false;
-        var enabled = event.detail;
+    scope.setHideTips = function() {
+        var enabled = hideTipsOption.checked;
 
-        if (enabled) {
-
+        if (!enabled) {
+            var e = document.getElementById("dissenter-tab-foot");
+            e.classList.remove('hidden');
+        } else {
+            var e = document.getElementById("dissenter-tab-foot");
+            e.classList.add('hidden');
         }
     }
     //

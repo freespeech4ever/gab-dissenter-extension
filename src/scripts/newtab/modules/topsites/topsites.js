@@ -4,9 +4,6 @@ var TopSites = function() {
 
     var topSiteList = document.getElementById('top-site-list');
     var topSitesEnabledCheckbox = document.querySelector('.sidebar-table-item__input.sidebar-table-item__input--checkbox[data-storage-key="nt_top_sites_enabled"]');
-    var tipsCheckbox = document.querySelector('.sidebar-table-item__input.sidebar-table-item__input--checkbox[data-storage-key="nt_dissenter_hide_tips"]');
-    var tipsContent = document.getElementById("dissenter-tab-foot");
-    var tipsCloser = document.getElementById("dissenter-tab-foot-closer");
     var topSiteItems = [];
 
     var sizes = ["sm", "md", "lg"];
@@ -20,21 +17,6 @@ var TopSites = function() {
 
         createTopWithDefaults();
     });
-
-    function updateTipsState() {
-        if (tipsCheckbox.checked) {
-            tipsContent.classList.toggle("hidden", true)
-        } else {
-            tipsContent.classList.toggle("hidden", false)
-        }
-    }
-
-    tipsCloser.addEventListener("click", function() {
-        tipsCheckbox.checked = true;
-        updateTipsState();
-    })
-
-    tipsCheckbox.addEventListener("change", updateTipsState)
 
     function createTopWithDefaults() {
         createTop(
@@ -54,7 +36,7 @@ var TopSites = function() {
             return false;
         }
         reset();
-        topSites = newTab.userDefaults[NT_DISSENTER_PINS]['page1'];;
+        topSites = newTab.userDefaults[NT_DISSENTER_PINS]['page1'];
         
         var max = Math.min(topSites.length, limit);
 
@@ -83,7 +65,13 @@ var TopSites = function() {
         if (!shape) shape = newTab.userDefaults[NT_TOP_SITES_SHAPE];
         if (!highlight) highlight = newTab.userDefaults[NT_TOP_SITES_HIGHLIGHT];
 
-        var hostname = (new URL(site.url)).hostname;
+        var hostname;
+        try {
+            hostname = (new URL(site.url)).hostname;
+        } catch (e) { 
+            scope.removePinnedSite(site.url);
+            return false;
+        }
         var titleText = site.title;
 
         var button = document.createElement('a');
@@ -105,8 +93,54 @@ var TopSites = function() {
         button.appendChild(image);
         button.appendChild(title);
 
-        return button;
+        var wrapper = document.createElement('div');
+        wrapper.className = 'top-site-wrapper';
+        var closer = document.createElement('a');
+        closer.className = 'top-site-remove';
+        closer.textContent = 'X';
+        closer.addEventListener("click", function(event) {
+            scope.removePinnedSite(site.url);
+        });
+        wrapper.appendChild(button);
+        wrapper.appendChild(closer);
+
+        return wrapper;
     };
+
+    scope.removePinnedSite = function(url) {
+        if (!url) return;
+        var pins = newTab.userDefaults[NT_DISSENTER_PINS]['page1'];
+        pins.splice(pins.findIndex(function(i) {
+            return i.url === url;
+        }), 1);
+        var event2 = new CustomEvent("WELM_update_settings_item", {
+            detail: {
+                key: NT_DISSENTER_PINS,
+                value: {"page1":pins},
+                updateInRuntime: true,
+                updateInput: false
+            }
+        });
+        window.dispatchEvent(event2);
+        createTopWithDefaults();
+    }
+
+    scope.addPinnedSite = function(url, title) {
+        if (!url || !title) return;
+        var newSite = {url:url, title:title};
+        var pins = newTab.userDefaults[NT_DISSENTER_PINS]['page1'];
+        pins.push(newSite);
+        var event2 = new CustomEvent("WELM_update_settings_item", {
+            detail: {
+                key: NT_DISSENTER_PINS,
+                value: {"page1":pins},
+                updateInRuntime: true,
+                updateInput: false
+            }
+        });
+        window.dispatchEvent(event2);
+        createTopWithDefaults();
+    }
 
     //
 
@@ -155,6 +189,38 @@ var TopSites = function() {
     };
 
     //
+    var pinnedEntryDiv = document.getElementById("pinned-site-entry");
+    var pinnedAddButton = document.getElementById("top-site-add-button");
+    pinnedAddButton.addEventListener('click', function() {
+        pinnedEntryDiv.classList.remove('hidden');
+        pinnedAddButton.classList.add('hidden');
+    });
+
+    var pinnedCancelButton = document.getElementById("pinned-cancel");
+    pinnedCancelButton.addEventListener('click', function() {
+        pinnedEntryDiv.classList.add('hidden');
+        pinnedAddButton.classList.remove('hidden');
+    });
+
+    var pinned_url = document.getElementById("pinned_url");
+    var pinned_title = document.getElementById("pinned_title");
+    var pinned_submit = document.getElementById("pinned-submit");
+    pinned_submit.addEventListener('click', function() {
+        if (!pinned_url.value || !pinned_title.value) {
+            return alert('Must enter both fields.');
+        }
+        try {
+            var url = new URL(pinned_url.value);
+        } catch (e) {
+            return alert('Invalid URL.  Should be a valid url like: https://www.dissenter.com/');
+        }
+        scope.addPinnedSite(pinned_url.value, pinned_title.value);
+        pinnedEntryDiv.classList.add('hidden');
+        pinnedAddButton.classList.remove('hidden');
+        pinned_url.value = '';
+        pinned_title.value = '';
+    })
+
 
     window.addEventListener("WELM_nt_top_sites_enabled", scope.setTopSitesEnabled, false);
     window.addEventListener("WELM_nt_top_sites_limit", scope.updateTopSites, false);
